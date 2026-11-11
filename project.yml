@@ -1,0 +1,50 @@
+name: YaboIOS
+options:
+  bundleIdPrefix: com.yabo
+  deploymentTarget:
+    iOS: "15.0"
+  createIntermediateGroups: true
+
+targets:
+  YaboIOS:
+    type: application
+    platform: iOS
+    sources:
+      - path: "."
+        includes:
+          - "*.swift"
+    info:
+      path: Info.plist
+      properties:
+        CFBundleDisplayName: 鸭脖的传说
+        CFBundleShortVersionString: "2.1"
+        CFBundleVersion: "177"
+        LSRequiresIPhoneOS: true
+        UIApplicationSupportsIndirectInputEvents: true
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        NSPhotoLibraryAddUsageDescription: 需要写入相册以保存解析到的视频与图片
+        NSPhotoLibraryUsageDescription: 需要访问相册以保存解析到的视频与图片
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true
+          NSAllowsArbitraryLoadsInWebContent: true
+        ITSAppUsesNonExemptEncryption: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.yabo.chuanshuo
+        MARKETING_VERSION: "2.1"
+        CURRENT_PROJECT_VERSION: "177"
+        TARGETED_DEVICE_FAMILY: "1"
+        CODE_SIGN_STYLE: Automatic
+        GENERATE_INFOPLIST_FILE: NO
+
+schemes:
+  YaboIOS:
+    build:
+      targets:
+        YaboIOS: all
+    run:
+      config: Release
+    archive:
+      config: Release

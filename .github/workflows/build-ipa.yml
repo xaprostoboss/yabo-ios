@@ -1,0 +1,31 @@
+name: build-ipa
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  unsigned:
+    runs-on: macos-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: xcodebuild -version
+
+      - name: Install xcodegen
+        run: brew install xcodegen
+
+      - name: Build unsigned IPA
+        run: |
+          chmod +x build_ipa.sh
+          ./build_ipa.sh unsigned
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: YaboIOS-ipa-unsigned
+          path: build/YaboIOS-unsigned.ipa
+          retention-days: 30
